@@ -1,0 +1,144 @@
+
+// Bootstrap Variables
+$icon-font-path: '../../node_modules/bootstrap-sass/assets/fonts/bootstrap/';
+
+// Import Bootstrap
+@import '../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
+
+$orange-theme:#ff5f2e;
+$blue-theme:#004e66;
+$yellow-theme:#fcbe32;
+$grey-theme:#e1eef6;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+.btn-primary{
+  background-color: $blue-theme;
+  color:white;
+}
+.btn-primary:hover{
+  background-color: $yellow-theme
+}
+.hidden{
+  display:none;
+}
+img {
+  max-width: 100%;
+}
+header{
+  height:50px;
+  margin-bottom: 20px;
+  padding-top:0px;
+  padding-bottom: 12px;
+  background-color:$yellow-theme;
+  color:white;
+
+}
+h1{
+  font-family: 'Oswald', sans-serif;
+  font-size: 48px;
+  font-weight: bold;
+  margin: 0 0 0 0;
+  color:$blue-theme;
+  position:relative;
+  bottom:5px;
+  text-align: center;
+  padding: 0px;
+}
+h2{
+  margin:0px;
+  font-weight: normal;
+}
+.servings{
+  width:40px;
+}
+.recipe-mod{
+  border: solid 1px black;
+}
+.taskbar-col{
+  padding-left: 0px;
+}
+.taskbar{
+  padding-left: 0px;
+  list-style: none;
+  color:white;
+  margin:0px 0px 10px 0px;
+
+  a{
+    color:white;
+  }
+  li{
+    font-family: "myriad pro";
+    width:25%;
+    margin-left:10px;
+    margin-top:10px;
+    background-color: $blue-theme;
+    padding:10px;
+    display:inline-block;
+    text-align: center;
+    border-radius: 3px;
+
+  }
+}
+.navbar{
+  border-bottom: solid 1px $grey-theme;
+  padding-bottom: 23px;
+}
+header ul{
+  float:right;
+  margin-right:15px;
+}
+.img-upload{
+  height: 200px;
+  width: 200px;
+  background-image: url('../images/UPLOADPLACEHOLDER.svg');
+  background-position: center;
+}
+.serving-cap{
+  text-align: right;
+    span{
+    font-size: 1em;
+    position: relative;
+    top:7px;
+    }
+}
+.login,.signup{
+  display:inline-block;
+  width:100px;
+  padding:15px;
+  font-family: "myriad pro";
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 10px;
+  margin-right:10px;
+  color:white;
+
+  a{
+    text-decoration: none;
+    color:white;
+  }
+}
+.row-1,.row-2,.row-3,.steps{
+  border: solid 1px $grey-theme;
+  padding:10px;
+}
+.recipe-title input{
+  margin:10px;
+}
+.steps{
+  .row{
+    padding:10px;
+
+  }
+  textarea{
+    margin-top:15px;
+    margin-bottom:15px;
+  }
+}
+
+.recipe-button{
+  margin: 20px auto;
+}
