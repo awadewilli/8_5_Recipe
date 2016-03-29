@@ -1,10 +1,13 @@
 var Backbone = require('backbone');
 var React = require('react');
 var ReactDom = require('react-dom');
+var Parse = require('parse');
 
-var recipes = React.createClass({
+var Recipe = Parse.Object.extend('Recipe');
 
-  render:function(){
+var Ingredient = Parse.Object.extend("ingredient");
 
-  }
-});
+module.exports = {
+  'Recipe':Recipe,
+  'Ingredient':Ingredient
+};

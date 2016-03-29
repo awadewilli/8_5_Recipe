@@ -2,6 +2,8 @@ var Backbone = require('backbone');
 var React = require('react');
 var ReactDom = require('react-dom');
 var $ = require('jquery');
+
+var models = require('../models/recipes');
 var steps = [];
 
 var RecipeForm = React.createClass({
@@ -11,12 +13,33 @@ var RecipeForm = React.createClass({
         <RecipeNameForm />
         <StepsForm />
           <div className="col-md-8 col-md-offset-2 steps">
-            <button className="btn btn-primary recipe-button" type="button">
+            <button className="btn btn-primary recipe-button" type="button" onClick={this.addRecipe}>
               Create new Recipe </button>
           </div>
       </div>
 
     );
+  },
+  addRecipe: function(e){
+    e.preventDefault();
+    var recipe = new models.Recipe();
+    recipe.set({
+      "title": $('#title').val(),
+      "ingredients": steps
+    });
+    recipe.save(null, {
+      success: function(recipe) {
+        // Execute any logic that should take place after the object is saved.
+        alert('New object created with objectId: ' + recipe.id);
+        location.reload();
+
+      },
+      error: function(recipe, error) {
+        // Execute any logic that should take place if the save fails.
+        // error is a Parse.Error with an error code and message.
+        alert('Failed to create new object, with error code: ' + error.message);
+      }
+    });
   }
 });
 
@@ -36,7 +59,7 @@ var RecipeNameForm = React.createClass({
             <div className="col-md-8">
               <div className="row recipe-title">
                 <div className="col-md-12">
-                  <input type="text" className="form-control" placeholder="Recipe Name" name="recipeName"/>
+                  <input type="text" className="form-control" id="title" placeholder="Recipe Name" name="recipeName"/>
                 </div>
                 <div className="col-md-12">
                   <input type="text" className="form-control" placeholder="By" name="by"/>
@@ -102,12 +125,20 @@ var StepsForm = React.createClass({
             </div>
 
             <div className="col-md-3">
-              <button className="btn btn-primary" type="button"> Add another Step</button>
+              <button className="btn btn-primary" type="button" onClick={this.handleAdd}> Add another Step</button>
             </div>
           </div>
       </div>
       );
-    }
+    },
+
+    handleAdd:function(){
+        var step = {'instruction':$('.step-descrip').val(), 'ingredient':$('.ingredient').val(),'unit':$('.units').val(),'amount':$('.ing-amt').val()};
+        $('#step-row').prepend('<div class="step"><ul><li>' + step.unit + " " + step.ingredient + " " + step.amount + '</li></ul></div>');
+        steps.push(step);
+        console.log(step);
+        console.log(steps);
+      }
   });
 
   var Step = React.createClass({
@@ -130,23 +161,10 @@ var StepsForm = React.createClass({
           <div className="col-md-6">
             <input type="text" className="form-control ingredient" placeholder="Ingredient" name="ingredient"/>
           </div>
-
-          <div className="col-md-1">
-            <button type="button" onClick={this.handleAdd}> + </button>
-          </div>
         </div>
       );
-    },
-handleChange:function(){
+    }
 
-  },
-handleAdd:function(){
-    var step = {'instruction':$('.step-descrip').val(), 'ingredient':$('.ingredient').val(),'unit':$('.units').val(),'amount':$('.ing-amt').val()};
-    steps.push(step);
-    $("#step-row").append(JSON.stringify(step));
-    console.log(step);
-
-  }
 });
 
 module.exports=RecipeForm;

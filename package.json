@@ -30,6 +30,8 @@
     , "reactify": "^1.1.1"
     , "react-bootstrap": "^0.28.3"
     , "backbone-react-component": "^0.10.0"
+    ,"parse":"1.6.14"
+    ,"parse-react":"0.5.1"
   },
   "scripts": {
     "html": "cp app/*.html dist/",

@@ -7,7 +7,6 @@ var Parse = require('parse');
 var RecipeForm = require('./components/RecipeForm.jsx');
 var Login = require('./components/Signin.jsx');
 
- console.log(Login);
 
 var Router = Backbone.Router.extend({
 routes:{
