@@ -13,4 +13,8 @@ $('#signout').click(function(){
   Backbone.history.navigate('',{trigger:true});
 });
 
+$('#all-recipes').click(function(){
+  Backbone.history.navigate('recipes',{trigger:true});
+});
+
 Backbone.history.start();

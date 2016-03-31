@@ -2,6 +2,7 @@ var Backbone = require('backbone');
 var React = require('react');
 var ReactDom = require('react-dom');
 var $ = require('jquery');
+var Parse = require('parse');
 
 var models = require('../models/recipes');
 var steps = [];
@@ -24,15 +25,47 @@ var RecipeForm = React.createClass({
     e.preventDefault();
     var recipe = new models.Recipe();
     recipe.set({
+
       "title": $('#title').val(),
       "ingredients": steps
+
     });
     recipe.save(null, {
       success: function(recipe) {
         // Execute any logic that should take place after the object is saved.
         alert('New object created with objectId: ' + recipe.id);
-        location.reload();
 
+        var recipeIngredients = [];
+
+         for(var i=0; i<steps.length; i++){
+           var qty = steps[i].amount;
+           var name = steps[i].ingredient;
+           var unit = steps[i].unit;
+
+           console.log(steps[i]);
+           console.log(unit);
+           console.log(qty);
+
+           var ingredient = new models.Ingredient();
+           ingredient.set('qty',qty);
+           ingredient.set('unit',unit);
+           ingredient.set('name',name);
+           ingredient.set('recipe',recipe);
+
+           recipeIngredients.push(ingredient);
+         }
+         console.log(recipeIngredients);
+
+         Parse.Object.saveAll(recipeIngredients,{
+           success: function(list) {
+            alert('ingredients saved!');
+            location.reload();
+
+          },
+          error: function(error) {
+            console.log(error);
+          }
+        });
       },
       error: function(recipe, error) {
         // Execute any logic that should take place if the save fails.

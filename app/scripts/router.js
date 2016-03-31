@@ -6,13 +6,13 @@ var Parse = require('parse');
 
 var RecipeForm = require('./components/RecipeForm.jsx');
 var Login = require('./components/Signin.jsx');
-
+var RecipesList = require('./components/RecipesList.jsx');
 
 var Router = Backbone.Router.extend({
 routes:{
       '':'renderLogin',
      'home':'renderHome',
-  // 'all':allRecipes
+     'recipes':'renderRecipes'
 },
 
 renderLogin:function(){
@@ -30,6 +30,13 @@ renderHome:function(){
     document.getElementById('recipe-form')
   );
   ReactDom.unmountComponentAtNode(document.getElementById('login-container'));
+},
+renderRecipes:function(){
+  ReactDom.render(
+    React.createElement(RecipesList, null),
+    document.getElementById('recipe-form')
+  );
+  ReactDom.unmountComponentAtNode(document.getElementById('recipe-form'));
 }
 
 });
